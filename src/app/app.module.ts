@@ -19,6 +19,7 @@ import { FooterComponent } from './footer/footer.component';
 import { DonateComponent } from './donate/donate.component';
 import { FundraiserComponent } from './fundraiser/fundraiser.component';
 import { CategoryService } from './service/category.service';
+import { DonationService } from './service/donation.service';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { CategoryService } from './service/category.service';
     AuthGuard, 
     FundraisingService, 
     CategoryService,
+    DonationService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

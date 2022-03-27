@@ -1,35 +1,11 @@
-<!-- <nav class="navbar navbar-light " style="background-color: #A1CCDE;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href=" ">Kömek</a>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search">
-        <div class="input-group-append">
-          <button class="btn btn-secondary" type="button">
-            <i class="bi bi-search"></i>
-          </button>
-        </div>
-      </div>
-      <div class="sign">
-        <button type="button" class="btn btn-primary me-3" style="color: #010203; background-color: #A1CCDE; border-color: #969699">
-          Sign in/up
-        </button>
-      </div>
-        <button class="navbar-toggler" style="border-color: #969699">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-  </nav> -->
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #A1CCDE;">
-    <a class="navbar-brand" href="#">Kömek</a>
+    <a class="navbar-brand" routerLink="/home">Kömek</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
-        </li>
         <li class="nav-item" *ngIf = '!_authService.loggedIn()'>
           <a class="nav-link" routerLink="/signin" routerLinkActive="active">Sign In</a>
         </li>
@@ -37,7 +13,7 @@
           <a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign Up</a>
         </li>
         <li class="nav-item" *ngIf = "_authService.loggedIn()">
-          <a class="nav-link" (click)="_authService.logoutUser()">Log Out</a>
+          <a class="nav-link" type="button" (click)="_authService.logoutUser()">Log Out</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
