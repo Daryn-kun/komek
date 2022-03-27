@@ -1,30 +1,26 @@
 <div class="row pt-4">
     <div class="col-8">
-        <h2>Help Almaty</h2>
+        <h2>{{fundraising.title}}</h2>
     </div>
 </div>
 <div class="row pt-3">
     <div class="col-8">
         <div class="card border-0">
-            <img class="card-img-bottom rounded" src="https://imgtest.mir24.tv/uploaded/images/crops/2022/January/870x489_8x600_detail_crop_20220106133042_dd774fd3_2c6744b43f415d055efeff376430f0ad1dee42f42daeb65925274dbd6ba845b6.jpg" alt="Card image cap">
+            <img class="card-img-bottom rounded" src="{{fundraising.imagePath}}" alt="Card image cap">
         </div>
         <div class="card border-0">
             <div class="card-header bg-transparent"> 
                 <span class="d-inline-block">
                     <i class="bi bi-person-heart text-success" style="font-size: 1.5rem;"></i>
                 </span>
-                <span class="d-inline-block p-3">Daryn is organising this fundraiser.</span>
+                <span class="d-inline-block p-3">{{firstName}} is organising this fundraiser.</span>
             </div>
             <div class="card-header bg-transparent">
-                <span class="d-inline-block">Created 15 ours ago</span>
+                <span class="d-inline-block">Created {{ getDateAgo(fundraising.date) }}</span>
                 <span class="d-inline-block px-3">|</span>
-                <span class="d-inline-block btn">Accidents and Emergencies</span>
+                <span class="d-inline-block btn">{{category}}</span>
             </div>
-            <div class="card-body">Hello everyone.
-                 We are organizing a donation for the restoration of the city of Almaty
-                 after the attacks of terrorists and bandit looters. We ask you to help as much as you can.
-                 Sincerely, Daryn.
-            </div>
+            <div class="card-body">{{fundraising.details}}</div>
         </div>
         <div class="card border-0 mt-4">
             <div class="card-header bg-transparent">
@@ -34,9 +30,9 @@
                 <div class="row">
                     <div class="col-0 px-3"><i class="bi bi-person-heart text-success" style="font-size: 1.5rem;"></i></div>
                     <div class="col">
-                        <div class="row"><b>Daryn Nurlan</b></div>
+                        <div class="row"><b>{{firstName}} {{lastName}}</b></div>
                         <div class="row">Organizer</div>
-                        <div class="row">Kazakhstan</div>
+                        <div class="row">{{fundraising.city}}</div>
                     </div>
                     <div class="col">
                         <button type="button" class="btn btn-outline-success float-right px-4">Contact</button>
@@ -72,11 +68,11 @@
         <div class="card shadow-lg rounded border-0">
             <div class="card-header bg-transparent border-0 mt-3">
                 <span class="d-inline-block"><h5>₸32.2 mil</h5></span>
-                <span class="d-inline-block pl-2">raised out of ₸100 mil goal</span>
+                <span class="d-inline-block pl-2">raised out of ₸{{getAmount(fundraising.amount_goal)}} goal</span>
             </div>
             <div class="card-body">
                 <button type="button" class="btn btn-info btn-lg btn-block shadow-sm">Share</button>
-                <button type="button" class="btn btn-warning btn-lg btn-block shadow-sm">Donate Now</button>
+                <button type="button" class="btn btn-warning btn-lg btn-block shadow-sm" (click)="onDonate(fundraising._id)">Donate Now</button>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" style="color: #6E2F91;">
                         <span class="d-inline-block">

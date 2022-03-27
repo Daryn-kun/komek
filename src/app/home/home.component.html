@@ -1,14 +1,76 @@
-<div class="row mt-5">
-    <div class="col-md-4 mb-3" *ngFor="let fundraising of fundraisings">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="{{fundraising.imagePath}}" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">{{fundraising.address}}</h5>
+<div id="carouselExampleControls" class="carousel slide mt-0" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="https://i.postimg.cc/brYd64fR/sick.jpg" alt="First slide">
+        <div class="centered-text">Qaiyrymdylyq jasasañ,
+            Qaiyryn özıñ köresıñ</div>
+          <button class="btn" routerLink="/fundraiser">Start Fundraising</button>
+      </div>
+    </div>
+</div>
+<h3 class="text">Top Fundraisers</h3>
+<!-- <div class="card-deck"> -->
+    <div class="row mt-5">
+        <div class="col-md-4 mb-3" *ngFor="let fundraising of fundraisings">
+            <div class="card">
+                <img class="card-img-top" src="{{fundraising.imagePath}}" alt="Card image cap">
+                <div class="card-body">
                 <h5 class="card-title">{{fundraising.title}}</h5>
                 <p class="card-text">{{fundraising.details}}</p>
-                <h6>goal: {{fundraising.amount_goal}}</h6>
+                </div>
+                <div class="card-footer">
+                <small class="text-muted">Last donation 3 mins ago</small>
+                <mat-progress-bar mode="determinate" value="16"></mat-progress-bar>
+                <small class="txt">₸20.000 raised of ₸{{getAmount(fundraising.amount_goal)}}</small>
+                </div>
                 <a [routerLink]="" class="stretched-link" (click)="onSelect(fundraising._id)"></a>
             </div>
         </div>
     </div>
-</div>
+<!-- </div> -->
+<!-- <div class="image">
+    <img src="https://i.postimg.cc/brYd64fR/sick.jpg" alt="Responsive image" height="600px" width="1370px">
+    <div class="centered">Qaiyrymdylyq jasasañ,
+      Qaiyryn özıñ köresıñ</div>
+    <button class="btn" routerLink="/fundraiser">Start Fundraising</button>
+  </div>
+  <h3 class="text">Top Fundraisers</h3>
+  <div class="card-deck">
+    <div class="card">
+      <img class="card-img-top" src="https://i.postimg.cc/N0W1zsdk/shelter.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Spay/neuter stray Langkawi puppies!</h5>
+        <p class="card-text">12 beautiful dogs were dumped in my neighborhood. I have already</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last donation 3 mins ago</small>
+        <mat-progress-bar mode="determinate" value="16"></mat-progress-bar>
+        <small class="txt">20.000₸ raised of 120.000₸</small>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="https://i.postimg.cc/x8mp4pGc/akymat.jpg" alt="Card image cap" height="200px">
+      <div class="card-body">
+       <h5 class="card-title"><a href="restoration" style="color: black">Restoration of Almaty</a></h5>
+        <p class="card-text">Hello everyone. We are organizing a donation for the restoration of the city </p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last donation 1 hour ago</small>
+        <mat-progress-bar mode="determinate" value="30"></mat-progress-bar>
+        <small class="txt">100.000.000₸ raised of 32.500.000₸</small>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="https://i.postimg.cc/FHrGyH6f/health.jpg" alt="Card image cap" height="200px">
+      <div class="card-body">
+        <h5 class="card-title">Kibi-hands for Fatima</h5>
+        <p class="card-text">That's what happened in Fatima's life...the girl was born with a terrible defect (Spina Bifida).</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last donation 5 hours ago</small>
+        <mat-progress-bar mode="determinate" value="50"></mat-progress-bar>
+        <small class="txt">500.000₸ raised of 1.000.000₸</small>
+      </div>
+    </div>
+  </div> -->
+  

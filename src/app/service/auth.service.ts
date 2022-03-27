@@ -4,18 +4,17 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  private _signupUrl = "http://localhost:3000/profiles/register"
-  private _signinUrl = "http://localhost:3000/profiles/login"
+  private _profilesUrl = "http://localhost:3000/profiles/"
 
   constructor(private http: HttpClient,
               private _router: Router) { }
 
   registerUser(user) {
-    return this.http.post<any>(this._signupUrl, user)
+    return this.http.post<any>(this._profilesUrl + 'register', user)
   }
   
   loginUser(user) {
-    return this.http.post<any>(this._signinUrl, user)
+    return this.http.post<any>(this._profilesUrl + 'login', user)
   }
 
   loggedIn() {
@@ -24,10 +23,20 @@ export class AuthService {
 
   logoutUser() {
     localStorage.removeItem('token')
+    localStorage.removeItem('user_id')
     this._router.navigate(['/signin'])
   }
 
   getToken() {
     return localStorage.getItem('token')
+  }
+
+  getLoggedUser(){
+    return localStorage.getItem('user_id')
+  }
+
+  getUserById(id: String){
+    console.log('userid passed ' + this._profilesUrl + id)
+    return this.http.get<any>(this._profilesUrl + id)
   }
 }

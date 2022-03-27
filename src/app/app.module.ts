@@ -14,6 +14,11 @@ import { FundraisingService } from './service/fundraising.service';
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptorService} from './service/token-interceptor.service';
 import { FundraisingComponent } from './fundraising/fundraising.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { DonateComponent } from './donate/donate.component';
+import { FundraiserComponent } from './fundraiser/fundraiser.component';
+import { CategoryService } from './service/category.service';
 
 
 @NgModule({
@@ -22,7 +27,11 @@ import { FundraisingComponent } from './fundraising/fundraising.component';
     HomeComponent,
     SigninComponent,
     SignupComponent,
-    FundraisingComponent
+    FundraisingComponent,
+    HeaderComponent,
+    FooterComponent,
+    DonateComponent,
+    FundraiserComponent
   ],
   imports: [
     BrowserModule,
@@ -31,12 +40,17 @@ import { FundraisingComponent } from './fundraising/fundraising.component';
     AppRoutingModule,
     NgbModule
   ],
-  providers: [AuthService, AuthGuard, FundraisingService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TokenInterceptorService,
-    multi: true
-  }],
+  providers: [
+    AuthService,
+    AuthGuard, 
+    FundraisingService, 
+    CategoryService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

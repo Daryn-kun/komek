@@ -20,11 +20,14 @@ export class HomeComponent implements OnInit {
         res => this.fundraisings = res,
         err => console.log(err)
       )
-    console.log(this.fundraisings)
   }
   onSelect(id: String){
     this._router.navigate(['/fundraising', id]);
     console.log("Passed id: " + id);
+  }
+
+  getAmount(value){
+    return this._fundraisingService.getAmountShort(value);
   }
 
 }
