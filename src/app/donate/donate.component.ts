@@ -75,7 +75,7 @@ export class DonateComponent implements OnInit {
     .subscribe(
       res => { 
         console.log(res)
-        this._router.navigate(['/'])
+        this._router.navigate(['/fundraising/' + this.id])
       },
       err => console.log(err)
     )

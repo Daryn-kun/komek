@@ -20,6 +20,12 @@ import { DonateComponent } from './donate/donate.component';
 import { FundraiserComponent } from './fundraiser/fundraiser.component';
 import { CategoryService } from './service/category.service';
 import { DonationService } from './service/donation.service';
+import { MypageComponent } from './myprofile/mypage/mypage.component';
+import { EditpageComponent } from './myprofile/editpage/editpage.component';
+import { MydonationsComponent } from './myprofile/mydonations/mydonations.component';
+import { ChangepassComponent } from './myprofile/changepass/changepass.component';
+import { AboutComponent } from './about/about.component';
+import { CategoryComponent } from './category/category.component';
 
 
 @NgModule({
@@ -32,7 +38,13 @@ import { DonationService } from './service/donation.service';
     HeaderComponent,
     FooterComponent,
     DonateComponent,
-    FundraiserComponent
+    FundraiserComponent,
+    MypageComponent,
+    EditpageComponent,
+    MydonationsComponent,
+    ChangepassComponent,
+    AboutComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

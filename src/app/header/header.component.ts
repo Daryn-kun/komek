@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { CategoryService } from '../service/category.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +10,24 @@ import { AuthService } from '../service/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public _authService: AuthService) { }
+  userID: string;
+  categories:any = []
+  constructor(public _authService: AuthService,
+              public _categoryService: CategoryService,
+              private _router: Router) { }
 
   ngOnInit(): void {
+    this._categoryService.getCategories()
+      .subscribe(
+        res => this.categories = res,
+        err => console.log(err)
+      )
+  }
+
+  onSelectProfile() {
+    this.userID = this._authService.getLoggedUser();
+    this._router.navigate(['/myprofile', this.userID]);
+    console.log("Passed id: " + this.userID);
   }
 
 }

@@ -45,20 +45,12 @@
                 <h4>Words of support</h4>
             </div>
             <div class="card-body">
-                <div class="row mb-3">
+                <div class="row mb-3" *ngFor="let donation of filterComment()">
                     <div class="col-0 px-3"><i class="bi bi-person-heart text-success" style="font-size: 1.5rem;"></i></div>
                     <div class="col">
-                        <div class="row"><b>Alua Zhakieva donated ₸15000</b></div>
-                        <div class="row">I hope our city will be restored soon!</div>
-                        <div class="row my-3"><small class="font-weight-light">9 hours ago</small></div>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-0 px-3"><i class="bi bi-person-heart text-success" style="font-size: 1.5rem;"></i></div>
-                    <div class="col">
-                        <div class="row"><b>Aida Sadvakasova donated ₸19000</b></div>
-                        <div class="row">I hope our city will be restored soon!</div>
-                        <div class="row my-3"><small class="font-weight-light">10 hours ago</small></div>
+                        <div class="row"><b>{{donation.donater}} donated ₸{{donation.donation}}</b></div>
+                        <div class="row">{{donation.comment}}</div>
+                        <div class="row my-3"><small class="font-weight-light">{{getDateAgo(donation.date)}}</small></div>
                     </div>
                 </div>
             </div>
@@ -67,8 +59,9 @@
     <div class="col-4">
         <div class="card shadow-lg rounded border-0">
             <div class="card-header bg-transparent border-0 mt-3">
-                <span class="d-inline-block"><h5>₸32.2 mil</h5></span>
+                <span class="d-inline-block"><h5>₸{{getCurrentTotal()}}</h5></span>
                 <span class="d-inline-block pl-2">raised out of ₸{{getAmount(fundraising.amount_goal)}} goal</span>
+                <input type="range" class="form-control-range" min="0" max="100" step="1" [value]="getTotalPercent()" disabled>
             </div>
             <div class="card-body">
                 <button type="button" class="btn btn-info btn-lg btn-block shadow-sm">Share</button>
@@ -78,15 +71,17 @@
                         <span class="d-inline-block">
                             <i class="bi bi-arrow-up-right-circle" style="font-size: 2rem;"></i>
                         </span>
-                        <span class="d-inline-block pl-3"><b>9800 donation</b></span>
+                        <span class="d-inline-block pl-3"><b>{{donations.length}} donations</b></span>
                     </li>
                     <li class="list-group-item">
                         <div class="row">
                             <div class="col-0 px-3"><i class="bi bi-person-heart" style="font-size: 2rem;"></i></div>
                             <div class="col">
-                                <div class="row">Alua Zhakieva</div>
+                                <div class="row">{{getResentDonation().donater}}</div>
                                 <div class="row">
-                                    <span class="d-inline-block"><b>₸15000</b></span>
+                                    <span class="d-inline-block"><b>₸
+                                        {{getResentDonation().donation}}
+                                    </b></span>
                                     <span class="d-inline-block px-3">|</span>
                                     <span class="d-inline-block">Resent donation</span>
                                 </div>
@@ -97,9 +92,9 @@
                         <div class="row">
                             <div class="col-0 px-3"><i class="bi bi-person-heart" style="font-size: 2rem;"></i></div>
                             <div class="col">
-                                <div class="row">Aida Sadvakasova</div>
+                                <div class="row">{{getTopDonation().donater}}</div>
                                 <div class="row">
-                                    <span class="d-inline-block"><b>₸19000</b></span>
+                                    <span class="d-inline-block"><b>₸{{getTopDonation().donation}}</b></span>
                                     <span class="d-inline-block px-3">|</span>
                                     <span class="d-inline-block">Top donation</span>
                                 </div>
@@ -110,9 +105,11 @@
                         <div class="row">
                             <div class="col-0 px-3"><i class="bi bi-person-heart text-success" style="font-size: 2rem;"></i></div>
                             <div class="col">
-                                <div class="row">Aida Sadvakasova</div>
+                                <div class="row">{{getFirstDonation().donater}}</div>
                                 <div class="row">
-                                    <span class="d-inline-block"><b>₸19000</b></span>
+                                    <span class="d-inline-block"><b>₸
+                                        {{getFirstDonation().donation}}
+                                    </b></span>
                                     <span class="d-inline-block px-3">|</span>
                                     <span class="d-inline-block">First donation</span>
                                 </div>
@@ -129,10 +126,4 @@
             </div>
         </div>
     </div>
-    <!-- <h1>Titile</h1>
-    <div>Image</div>
-    <div>Sidebar</div>
-    <div>Description</div>
-    <div>Content</div>
-    <div>Report</div> -->
 </div>

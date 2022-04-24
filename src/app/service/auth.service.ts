@@ -39,4 +39,12 @@ export class AuthService {
     console.log('userid passed ' + this._profilesUrl + id)
     return this.http.get<any>(this._profilesUrl + id)
   }
+
+  putUserById(id: String, user){
+    return this.http.put<any>(this._profilesUrl + 'editpage/' + id, user);
+  }
+
+  putUserPassById(id: String, user){
+    return this.http.put<any>(this._profilesUrl + 'changepass/' + id, user);
+  }
 }

@@ -14,4 +14,28 @@ export class DonationService {
     console.log('passed donation ' + donation)
     return this.http.post<any>(this._donationUrl + 'donate', donation)
   }
+
+  getDonations() {
+    return this.http.get<any>(this._donationUrl)
+  }
+
+  getDonationsByFundraising(id: String){
+    console.log('fundraising id: ' + this._donationUrl + 'fundraising?fundraisingid=' + id)
+    return this.http.get<any>(this._donationUrl + 'fundraising?fundraisingid=' + id)
+  }
+
+  getDonationsByUser(id: String){
+    console.log('user id: ' + this._donationUrl + 'user?userid=' + id)
+    return this.http.get<any>(this._donationUrl + 'user?userid=' + id)
+  }
+
+  getSortedByDateDonations(value:any){
+    let sortedDonations = value.map((obj) => {
+      return { ...obj, date: new Date(obj.date) };
+    })
+    sortedDonations = sortedDonations.sort(
+      (a, b) => a.date.getTime() - b.date.getTime(),
+      );
+    return sortedDonations;
+  }
 }

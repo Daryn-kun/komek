@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { ConstantPool } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -14,6 +15,11 @@ export class FundraisingService {
   getFundraisingById(id: String){
     console.log('id passed ' + this._fundraisingUrl + id)
     return this.http.get<any>(this._fundraisingUrl + id)
+  }
+
+  getFundraisingByCategory(id: String){
+    console.log('category id: ' + this._fundraisingUrl + 'category?categoryid=' + id)
+    return this.http.get<any>(this._fundraisingUrl + 'category?categoryid=' + id)
   }
 
   createFundraising(fundraising){
@@ -55,5 +61,12 @@ export class FundraisingService {
       }
     }
     return mess;
+  }
+
+  // total
+  getTotal(value:any){
+    let sum: number = 0;
+    value.forEach(a => sum += a.donation);
+    return sum;
   }
 }

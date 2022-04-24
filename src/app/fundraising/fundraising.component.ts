@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { CategoryService } from '../service/category.service';
+import { DonationService } from '../service/donation.service';
 import { FundraisingService } from '../service/fundraising.service';
 
 @Component({
@@ -12,15 +13,19 @@ import { FundraisingService } from '../service/fundraising.service';
 export class FundraisingComponent implements OnInit {
   id = this._route.snapshot.params['id'];
   fundraising:any = []
+  donations: any = []
+  user: any = []
   firstName: String;
   lastName: String;
   category: String;
+  getUser = false;
 
   constructor(private _fundraisingService: FundraisingService,
               private _router: Router,
               private _route: ActivatedRoute,
               private _authService: AuthService,
-              private _categoryService: CategoryService) { }
+              private _categoryService: CategoryService,
+              private _donationService: DonationService) { }
 
   ngOnInit(){
     // Getting fundraising data from db
@@ -48,8 +53,12 @@ export class FundraisingComponent implements OnInit {
         },
         err => console.log(err)
       )
+    this._donationService.getDonationsByFundraising(this.id)
+      .subscribe(
+        res => this.donations = res,
+        err => console.log(err)
+      )
   }
-
 
   getAmount(value){
     return this._fundraisingService.getAmountShort(value);
@@ -59,9 +68,35 @@ export class FundraisingComponent implements OnInit {
     return this._fundraisingService.getDateMess(value);
   }
 
+  getCurrentTotal(){
+    return this._fundraisingService.getAmountShort(this._fundraisingService.getTotal(this.donations));
+  }
+
+  getTopDonation(){
+    let sortedDonations = this.donations.sort((a, b) => (a.donation > b.donation) ? -1 : 1);
+    return sortedDonations[0];
+  }
+
+  getFirstDonation(){
+    return this._donationService.getSortedByDateDonations(this.donations)[0];
+  }
+
+  getResentDonation(){
+    return this._donationService.getSortedByDateDonations(this.donations).pop();
+  }
+
+  filterComment(){
+    return this.donations.filter(x => x.comment.length > 0);
+  }
+
+  getTotalPercent(){
+    let range = (Number(this._fundraisingService.getTotal(this.donations)) * 100) / Number(this.fundraising.amount_goal);
+    console.log('range ' + range)
+    return range;
+  }
+
   onDonate(id: String){
     this._router.navigate(['/donate', id]);
     console.log("Passed id: " + id);
   }
-
 }

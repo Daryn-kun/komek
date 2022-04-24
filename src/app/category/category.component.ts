@@ -1,42 +1,43 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from '../service/category.service';
 import { DonationService } from '../service/donation.service';
 import { FundraisingService } from '../service/fundraising.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
 })
-export class HomeComponent implements OnInit {
+export class CategoryComponent implements OnInit {
+  id = this._route.snapshot.params['id'];
+  category:any = [];
+  fundraisings:any = [];
+  donations:any = [];
 
-  fundraisings:any = []
-  categories:any = []
-  donations:any = []
-  sum: number = 0;
-  constructor(private _fundraisingService: FundraisingService,
-              private _categoryService: CategoryService,
-              private _donationService: DonationService,
+  constructor(private _route: ActivatedRoute,
+              public _categoryService: CategoryService,
+              public _fundraisingService: FundraisingService,
+              public _donationService: DonationService,
               private _router: Router) { }
 
-  ngOnInit(){
-    this._fundraisingService.getFundraisings()
+  ngOnInit(): void {
+    this._fundraisingService.getFundraisingByCategory(this.id)
+    .subscribe(
+      res => this.fundraisings = res,
+      err => console.log(err)
+    );
+    this._categoryService.getCategoryById(this.id)
       .subscribe(
-        res => this.fundraisings = res,
+        res => this.category = res,
         err => console.log(err)
-      )
-    this._categoryService.getCategories()
-      .subscribe(
-        res => this.categories = res,
-        err => console.log(err)
-      )
+      );
     this._donationService.getDonations()
       .subscribe(
         res => this.donations = res,
         err => console.log(err)
       )
+    console.log(this.category)
   }
 
   getAmount(value){

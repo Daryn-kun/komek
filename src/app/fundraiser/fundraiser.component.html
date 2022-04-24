@@ -6,10 +6,6 @@
         </div>
         <div class="card-body m-3">
           <form class="form">
-            <!-- <div class="form-group py-2">
-                <label class="label" for="title">Organizer</label>
-                <input type="text" #titleRef="ngModel" required class="form-control" placeholder="Title" name="title" id="title" [(ngModel)]="fundraiser.userid" >
-            </div> -->
             <div class="form-group py-2">
               <label class="label" for="title">Title of your fundraising</label>
               <input type="text" #titleRef="ngModel" required class="form-control" placeholder="Title" name="title" id="title" [(ngModel)]="fundraiser.title" >
@@ -17,7 +13,7 @@
             </div>
             <div class="form-group py-2">
               <label class="label" for="description">Description of fundraising</label>
-              <input type="description" #desRef="ngModel" required class="form-control" placeholder="Description" name="details" id="description" [(ngModel)]="fundraiser.details">
+              <textarea class="form-control" #desRef="ngModel" required class="form-control" name="details" id="description" [(ngModel)]="fundraiser.details" rows="10" placeholder="Description"></textarea>
               <div [hidden]="desRef.valid || desRef.pristine" class="alert alert-danger">Description is required</div>
             </div>
             <div class="form-group">
@@ -25,7 +21,6 @@
               <select class="form-control" [(ngModel)]="selectedValue" (change)="onChangeSelect($event)">
                 <option *ngFor="let category of categories" name="categoryid" [value]="category._id">{{category.name}}</option>
               </select>
-              {{selectedValue}}
             </div>
             <div class="form-group py-2">
               <label class="label" for="city">Which city do you live?</label>
@@ -48,7 +43,7 @@
                   <div class="col-12">
                     <div class="d-flex flex-column">
                       <p class="label1">Person Name</p>
-                      <input class="form-control mb-3" type="text" placeholder="Name" value="Zhakiyeva Alua">
+                      <input class="form-control mb-3" type="text" placeholder="First and Last Name">
                     </div>
                   </div>
                   <div class="col-12">

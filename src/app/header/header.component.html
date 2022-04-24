@@ -6,20 +6,32 @@
   
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li>
+          <div class="dropdown">
+            <a class="nav-link" type="button">Categories</a>
+            <div class="dropdown-content borderless rounded">
+              <ul class="list-unstyled" *ngFor="let category of categories">
+                <li><a href="/category/{{category._id}}">{{category.name}}</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item" *ngIf = "_authService.loggedIn()">
+          <a class="nav-link" type="button" (click)="onSelectProfile()">My profile</a>
+        </li>
         <li class="nav-item" *ngIf = '!_authService.loggedIn()'>
-          <a class="nav-link" routerLink="/signin" routerLinkActive="active">Sign In</a>
+          <a class="nav-link" type="button" routerLink="/signin" routerLinkActive="active">Sign In</a>
         </li>
         <li class="nav-item" *ngIf = "!_authService.loggedIn()">
-          <a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign Up</a>
+          <a class="nav-link" type="button" routerLink="/signup" routerLinkActive="active">Sign Up</a>
+        </li>
+        <li class="nav-item"> 
+          <a class="nav-link" type="button" routerLink="/about">About Us</a>
         </li>
         <li class="nav-item" *ngIf = "_authService.loggedIn()">
           <a class="nav-link" type="button" (click)="_authService.logoutUser()">Log Out</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
     </div>
   </nav>
   
