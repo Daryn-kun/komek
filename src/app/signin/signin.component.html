@@ -7,8 +7,8 @@
             <div class="card-body m-3">
                 <form class="form">
                     <div class="form-group py-2">
-                        <input type="text" #emailRef="ngModel" required class="form-control"  placeholder="Email" name="email" [(ngModel)]="loginUserData.email">
-                        <div [hidden]="emailRef.valid || emailRef.pristine" class="alert alert-danger">Email is required</div>
+                        <input type="text" #emailRef="ngModel" required class="form-control"  placeholder="Email" name="email" [(ngModel)]="loginUserData.email" email="true">
+                        <div [hidden]="emailRef.valid || emailRef.pristine" class="alert alert-danger">Email is not correct</div>
                     </div>
                     <div class="form-group">
                         <input type="password" #passRef="ngModel" required class="form-control" placeholder="Password" name="password" [(ngModel)]="loginUserData.password">

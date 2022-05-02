@@ -27,6 +27,10 @@ export class AuthService {
     this._router.navigate(['/signin'])
   }
 
+  getUsers() {
+    return this.http.get<any>(this._profilesUrl)
+  }
+
   getToken() {
     return localStorage.getItem('token')
   }
@@ -40,6 +44,16 @@ export class AuthService {
     return this.http.get<any>(this._profilesUrl + id)
   }
 
+  createUser(user){
+    console.log('passed user ' + user)
+    return this.http.post<any>(this._profilesUrl + 'create', user)
+  } 
+
+  deleteUserById(id: String) {
+    console.log('deleting user ' + id)
+    return this.http.get<any>(this._profilesUrl + 'delete/' + id);
+  }
+
   putUserById(id: String, user){
     return this.http.put<any>(this._profilesUrl + 'editpage/' + id, user);
   }
@@ -47,4 +61,14 @@ export class AuthService {
   putUserPassById(id: String, user){
     return this.http.put<any>(this._profilesUrl + 'changepass/' + id, user);
   }
+
+  getUserDonations(id: String) {
+    return this.http.get<any>(this._profilesUrl + 'mydonations/' + id);
+  }
+
+  redirectTo(url:string){
+    this._router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this._router.navigate([url]));
+ }
+  
 }

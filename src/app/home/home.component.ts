@@ -67,4 +67,10 @@ export class HomeComponent implements OnInit {
     return range;
   }
 
+  filterFundraisings(){
+    let sortedFundraisings = this.fundraisings.sort((a, b) => (a.amount_goal > b.amount_goal) ? -1 : 1);
+    sortedFundraisings = this.fundraisings.filter(x => x.active);
+    return sortedFundraisings;
+  }
+
 }

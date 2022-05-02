@@ -26,6 +26,7 @@ import { MydonationsComponent } from './myprofile/mydonations/mydonations.compon
 import { ChangepassComponent } from './myprofile/changepass/changepass.component';
 import { AboutComponent } from './about/about.component';
 import { CategoryComponent } from './category/category.component';
+import { AdminModule } from './admin/admin.module';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { CategoryComponent } from './category/category.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    AdminModule
   ],
   providers: [
     AuthService,

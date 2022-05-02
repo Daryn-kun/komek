@@ -15,6 +15,10 @@ export class DonationService {
     return this.http.post<any>(this._donationUrl + 'donate', donation)
   }
 
+  putDonationById(id: String,donation){
+    return this.http.put<any>(this._donationUrl + 'edit/' + id, donation);
+  }
+
   getDonations() {
     return this.http.get<any>(this._donationUrl)
   }
@@ -36,6 +40,12 @@ export class DonationService {
     sortedDonations = sortedDonations.sort(
       (a, b) => a.date.getTime() - b.date.getTime(),
       );
+
+    for(let i = 0; i < sortedDonations.length; i++){
+      if (sortedDonations[i].total == 0){
+        sortedDonations.splice(i, 1);
+      }
+    }
     return sortedDonations;
   }
 }

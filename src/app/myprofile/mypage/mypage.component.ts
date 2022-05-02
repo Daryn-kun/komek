@@ -8,38 +8,54 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./mypage.component.css']
 })
 export class MypageComponent implements OnInit {
+  id = this._route.snapshot.params['id'];
   userData: any = []
-  userID: string;
+  isExist: boolean;
+  userRole: number;
+  LoggedUserId: String;
 
   constructor(private _authService: AuthService,
               private _router: Router,
               private _route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userID = this._authService.getLoggedUser();
-    this._authService.getUserById(this.userID).subscribe(
+    this._authService.getUserById(this.id).subscribe(
       user => {
         this.userData = user
-        console.log(this.userID)
+        console.log(this.id)
+        if (this.userData.imagePath) {
+          console.log("yes");
+          this.isExist = true;
+        }
+        else {
+          console.log("no");
+          this.isExist = false;
+        }
       }
     )
+    this.LoggedUserId = this._authService.getLoggedUser();
+    this._authService.getUserById(this.LoggedUserId).subscribe(
+      user => {
+        this.userRole = user.userRole
+        console.log('userrole ' + this.userRole)
+      },
+      err => console.log(err)
+    )
+
   }
 
   onEdit() {
-    this.userID = this._authService.getLoggedUser();
-    this._router.navigate(['/editpage', this.userID]);
-    console.log("Passed id: " + this.userID);
+    this._router.navigate(['/editpage', this.id]);
+    console.log("Passed id: " + this.id);
   }
 
   onChangePass() {
-    this.userID = this._authService.getLoggedUser();
-    this._router.navigate(['/changepass', this.userID]);
-    console.log("Passed id: " + this.userID);
+    this._router.navigate(['/changepass', this.id]);
+    console.log("Passed id: " + this.id);
   }
 
   onDonations() {
-    this.userID = this._authService.getLoggedUser();
-    this._router.navigate(['/mydonations', this.userID]);
-    console.log("Passed id: " + this.userID);
+    this._router.navigate(['/mydonations', this.id]);
+    console.log("Passed id: " + this.id);
   }
 }

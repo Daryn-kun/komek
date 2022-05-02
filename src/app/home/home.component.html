@@ -11,7 +11,7 @@
 <hr>
 <h3 class="text">Top Fundraisers</h3>
 <div class="row mt-5 mb-5">
-    <div class="col-4 mb-3" *ngFor="let fundraising of fundraisings | slice:0:3;">
+    <div class="col-4 mb-3" *ngFor="let fundraising of filterFundraisings() | slice:0:3;">
         <div class="card shadow-lg rounded justify-content-center" style="width: 18rem;">
             <img class="card-img-top" src="{{fundraising.imagePath}}" alt="Card image cap">
             <div class="card-body" style="height: 10rem;">

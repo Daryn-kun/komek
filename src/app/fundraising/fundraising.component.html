@@ -65,7 +65,8 @@
             </div>
             <div class="card-body">
                 <button type="button" class="btn btn-info btn-lg btn-block shadow-sm">Share</button>
-                <button type="button" class="btn btn-warning btn-lg btn-block shadow-sm" (click)="onDonate(fundraising._id)">Donate Now</button>
+                <button type="button" *ngIf = "userLogged.userRole != 1 && fundraising.userid != userLogged._id" class="btn btn-warning btn-lg btn-block shadow-sm" (click)="onDonate(fundraising._id)">Donate Now</button>
+                <button type="button" routerLink="/editfundraising/{{fundraising._id}}" *ngIf = "_authService.loggedIn() && (userLogged.userRole == 1 || fundraising.userid == userLogged._id)" class="btn btn-success btn-lg btn-block shadow-sm">Edit</button>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" style="color: #6E2F91;">
                         <span class="d-inline-block">

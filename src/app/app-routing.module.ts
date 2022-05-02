@@ -73,7 +73,8 @@ const routes: Routes = [
   {
     path: 'category/:id',
     component: CategoryComponent
-  }
+  },
+  {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
 ];
 
 @NgModule({

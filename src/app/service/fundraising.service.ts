@@ -26,6 +26,20 @@ export class FundraisingService {
     console.log('passed fundraising ' + fundraising)
     return this.http.post<any>(this._fundraisingUrl + 'create', fundraising)
   }
+
+  putFundraisingById(id: String, fundraising){
+    return this.http.put<any>(this._fundraisingUrl + 'edit/' + id, fundraising);
+  }
+
+  putActivateById(id: String, fundraising){
+    return this.http.put<any>(this._fundraisingUrl + 'activate/' + id, fundraising);
+  }
+
+  deleteFundraisingById(id: String) {
+    console.log('deleting fundraising ' + id)
+    return this.http.get<any>(this._fundraisingUrl + 'delete/' + id);
+  }
+
   // global function to take short version of amount
   getAmountShort(value){
     let mess: String;

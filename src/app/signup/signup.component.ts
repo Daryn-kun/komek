@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
           console.log(res.user_id),
           localStorage.setItem('token', res.token),
           localStorage.setItem('user_id', res.user_id),
-          this._router.navigate(['/'])
+          this._auth.redirectTo('/')
         },
         err => console.log(err)
       )

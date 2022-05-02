@@ -19,11 +19,13 @@ export class FundraisingComponent implements OnInit {
   lastName: String;
   category: String;
   getUser = false;
+  loggedID: string;
+  userLogged: any = []
 
   constructor(private _fundraisingService: FundraisingService,
               private _router: Router,
               private _route: ActivatedRoute,
-              private _authService: AuthService,
+              public _authService: AuthService,
               private _categoryService: CategoryService,
               private _donationService: DonationService) { }
 
@@ -58,6 +60,14 @@ export class FundraisingComponent implements OnInit {
         res => this.donations = res,
         err => console.log(err)
       )
+    this.loggedID = this._authService.getLoggedUser();
+    if (this.loggedID !== undefined) {
+      this._authService.getUserById(this.loggedID)
+        .subscribe(
+          res => this.userLogged = res,
+          err => console.log(err)
+        )
+    }
   }
 
   getAmount(value){
@@ -86,7 +96,7 @@ export class FundraisingComponent implements OnInit {
   }
 
   filterComment(){
-    return this.donations.filter(x => x.comment.length > 0);
+    return this.donations.filter(x => x.comment.length > 0 && x.total > 0);
   }
 
   getTotalPercent(){

@@ -6,6 +6,9 @@
   
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item" *ngIf = "_authService.loggedIn() && user.userRole == 1">
+          <a class="nav-link" type="button" routerLink="/admin">Dashboard</a>
+        </li>
         <li>
           <div class="dropdown">
             <a class="nav-link" type="button">Categories</a>
@@ -17,7 +20,7 @@
           </div>
         </li>
         <li class="nav-item" *ngIf = "_authService.loggedIn()">
-          <a class="nav-link" type="button" (click)="onSelectProfile()">My profile</a>
+          <a class="nav-link" type="button" (click)="onSelectProfile()">{{user.firstname}}</a>
         </li>
         <li class="nav-item" *ngIf = '!_authService.loggedIn()'>
           <a class="nav-link" type="button" routerLink="/signin" routerLinkActive="active">Sign In</a>
