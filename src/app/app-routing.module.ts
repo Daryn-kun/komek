@@ -6,6 +6,7 @@ import { DonateComponent } from './donate/donate.component';
 import { FundraiserComponent } from './fundraiser/fundraiser.component';
 import { FundraisingComponent } from './fundraising/fundraising.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 import { HomeComponent } from './home/home.component';
 import { ChangepassComponent } from './myprofile/changepass/changepass.component';
 import { EditpageComponent } from './myprofile/editpage/editpage.component';
@@ -74,7 +75,7 @@ const routes: Routes = [
     path: 'category/:id',
     component: CategoryComponent
   },
-  {path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
+  {path: 'admin', canActivate: [AuthGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},
 ];
 
 @NgModule({

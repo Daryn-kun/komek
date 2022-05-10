@@ -81,20 +81,25 @@ export class FundraisingsComponent implements OnInit {
   }
 
   activateFundraising(id: String, value: number){
+    let mes: String;
     if (value == 1) {
+      mes = 'deactivate'
       this.fundraising.active = false
     }
     if (value == 2) {
+      mes = 'activate'
       this.fundraising.active = true
     }
-    this._fundraisingService.putActivateById(id,this.fundraising)
-      .subscribe(
-        res => { 
-          console.log(res)
-          this._userService.redirectTo('fundraisings');
-        },
-        err => console.log(err)
-      )
+    if (window.confirm("Are your sure you want to " + mes + " this fundraising?")){
+      this._fundraisingService.putActivateById(id,this.fundraising)
+        .subscribe(
+          res => { 
+            console.log(res)
+            this._userService.redirectTo('fundraisings');
+          },
+          err => console.log(err)
+        )
+    }
   }
 
 }

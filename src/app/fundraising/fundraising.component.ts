@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalcontactComponent } from '../modalcontact/modalcontact.component';
+import { ModaldonationsComponent } from '../modaldonations/modaldonations.component';
 import { AuthService } from '../service/auth.service';
 import { CategoryService } from '../service/category.service';
 import { DonationService } from '../service/donation.service';
 import { FundraisingService } from '../service/fundraising.service';
+
 
 @Component({
   selector: 'app-fundraising',
@@ -25,9 +29,10 @@ export class FundraisingComponent implements OnInit {
   constructor(private _fundraisingService: FundraisingService,
               private _router: Router,
               private _route: ActivatedRoute,
-              public _authService: AuthService,
+              public  _authService: AuthService,
               private _categoryService: CategoryService,
-              private _donationService: DonationService) { }
+              private _donationService: DonationService,
+              private modalService: NgbModal) { }
 
   ngOnInit(){
     // Getting fundraising data from db
@@ -109,4 +114,38 @@ export class FundraisingComponent implements OnInit {
     this._router.navigate(['/donate', id]);
     console.log("Passed id: " + id);
   }
+
+  open(type){
+    const modalRef = this.modalService.open(ModaldonationsComponent);
+    modalRef.componentInstance.id = this.id;
+    modalRef.componentInstance.type = type;
+  }
+
+  contact(id){
+    const modalRef = this.modalService.open(ModalcontactComponent);
+    modalRef.componentInstance.id = id
+  }
+
+  activateFundraising(id: String, value: number){
+    let mes: String;
+    if (value == 1) {
+      mes = 'deactivate'
+      this.fundraising.active = false
+    }
+    if (value == 2) {
+      mes = 'activate'
+      this.fundraising.active = true
+    }
+    if (window.confirm("Are your sure you want to " + mes + " this fundraising?")){
+      this._fundraisingService.putActivateById(id,this.fundraising)
+        .subscribe(
+          res => { 
+            console.log(res)
+            this._authService.redirectTo('');
+          },
+          err => console.log(err)
+        )
+    }
+  }
+
 }

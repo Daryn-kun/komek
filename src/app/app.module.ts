@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AuthService } from './service/auth.service';
 import { FundraisingService } from './service/fundraising.service';
 import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 import { TokenInterceptorService} from './service/token-interceptor.service';
 import { FundraisingComponent } from './fundraising/fundraising.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,6 +21,7 @@ import { DonateComponent } from './donate/donate.component';
 import { FundraiserComponent } from './fundraiser/fundraiser.component';
 import { CategoryService } from './service/category.service';
 import { DonationService } from './service/donation.service';
+import { MessageService } from './service/message.service';
 import { MypageComponent } from './myprofile/mypage/mypage.component';
 import { EditpageComponent } from './myprofile/editpage/editpage.component';
 import { MydonationsComponent } from './myprofile/mydonations/mydonations.component';
@@ -27,6 +29,9 @@ import { ChangepassComponent } from './myprofile/changepass/changepass.component
 import { AboutComponent } from './about/about.component';
 import { CategoryComponent } from './category/category.component';
 import { AdminModule } from './admin/admin.module';
+import { ModaldonationsComponent } from './modaldonations/modaldonations.component';
+import { ModalcontactComponent } from './modalcontact/modalcontact.component';
+import { ModalalertComponent } from './modalalert/modalalert.component';
 
 
 @NgModule({
@@ -45,7 +50,10 @@ import { AdminModule } from './admin/admin.module';
     MydonationsComponent,
     ChangepassComponent,
     AboutComponent,
-    CategoryComponent
+    CategoryComponent,
+    ModaldonationsComponent,
+    ModalcontactComponent,
+    ModalalertComponent
   ],
   imports: [
     BrowserModule,
@@ -57,10 +65,12 @@ import { AdminModule } from './admin/admin.module';
   ],
   providers: [
     AuthService,
-    AuthGuard, 
+    AuthGuard,
+    AdminGuard, 
     FundraisingService, 
     CategoryService,
     DonationService,
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

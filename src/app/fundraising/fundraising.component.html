@@ -35,7 +35,7 @@
                         <div class="row">{{fundraising.city}}</div>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-outline-success float-right px-4">Contact</button>
+                        <button type="button" class="btn btn-outline-success float-right px-4" (click)="contact(fundraising.userid)">Contact</button>
                     </div>
                 </div>
             </div>
@@ -65,9 +65,13 @@
             </div>
             <div class="card-body">
                 <button type="button" class="btn btn-info btn-lg btn-block shadow-sm">Share</button>
-                <button type="button" *ngIf = "userLogged.userRole != 1 && fundraising.userid != userLogged._id" class="btn btn-warning btn-lg btn-block shadow-sm" (click)="onDonate(fundraising._id)">Donate Now</button>
+                <button type="button" *ngIf="userLogged.userRole != 1 && fundraising.userid != userLogged._id" class="btn btn-warning btn-lg btn-block shadow-sm" (click)="onDonate(fundraising._id)">Donate Now</button>
                 <button type="button" routerLink="/editfundraising/{{fundraising._id}}" *ngIf = "_authService.loggedIn() && (userLogged.userRole == 1 || fundraising.userid == userLogged._id)" class="btn btn-success btn-lg btn-block shadow-sm">Edit</button>
-                <ul class="list-group list-group-flush">
+                <a type="button" *ngIf="fundraising.active && (userLogged.userRole == 1 || fundraising.userid == userLogged._id); else elseBlock" (click)="activateFundraising(fundraising._id,1)" class="btn btn-secondary btn-lg btn-block shadow-sm">Deactivate</a>
+                <ng-template #elseBlock>
+                  <a type="button" *ngIf="userLogged.userRole == 1 || fundraising.userid == userLogged._id" (click)="activateFundraising(fundraising._id,2)" class="btn btn-primary btn-lg btn-block shadow-sm">Activate</a>
+                </ng-template>
+                <ul class="list-group list-group-flush" *ngIf="donations.length > 0">
                     <li class="list-group-item" style="color: #6E2F91;">
                         <span class="d-inline-block">
                             <i class="bi bi-arrow-up-right-circle" style="font-size: 2rem;"></i>
@@ -80,8 +84,7 @@
                             <div class="col">
                                 <div class="row">{{getResentDonation().donater}}</div>
                                 <div class="row">
-                                    <span class="d-inline-block"><b>₸
-                                        {{getResentDonation().donation}}
+                                    <span class="d-inline-block"><b>₸{{getResentDonation().donation}}
                                     </b></span>
                                     <span class="d-inline-block px-3">|</span>
                                     <span class="d-inline-block">Resent donation</span>
@@ -108,8 +111,7 @@
                             <div class="col">
                                 <div class="row">{{getFirstDonation().donater}}</div>
                                 <div class="row">
-                                    <span class="d-inline-block"><b>₸
-                                        {{getFirstDonation().donation}}
+                                    <span class="d-inline-block"><b>₸{{getFirstDonation().donation}}
                                     </b></span>
                                     <span class="d-inline-block px-3">|</span>
                                     <span class="d-inline-block">First donation</span>
@@ -117,14 +119,15 @@
                             </div>
                         </div>
                     </li>
-                  </ul>
+                </ul>
             </div>
-            <div class="card-footer bg-transparent border-0 mb-3">
-                <button type="button" class="btn btn-outline-success px-4"><b>See all</b></button>
-                <button type="button" class="btn btn-outline-info float-right px-3">
+            <div class="card-footer bg-transparent border-0 mb-3"  *ngIf="donations.length > 0">
+                <button type="button" class="btn btn-outline-success px-4" (click)="open(1)"><b>See all</b></button>
+                <button type="button" class="btn btn-outline-info float-right px-3" (click)="open(2)">
                     <i class="bi bi-star"></i><b class="ml-2">See top donations</b>
                 </button>
             </div>
         </div>
     </div>
 </div>
+  

@@ -48,19 +48,20 @@
                 <div class="card-body">
                 <div class="form-group"> 
                     <label for="cc-number" class="control-label">Card Number</label> 
-                    <input id="cc-number" type="number" [(ngModel)]="checkout.card_num" class="input-lg form-control cc-number" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required> 
+                    <input id="cc-number" type="text" minlength="19" maxlength="19" [(ngModel)]="checkout.card_num" (ngModelChange)="onChangeCard($event)" class="input-lg form-control cc-number" 
+                           autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required> 
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                     <div class="form-group"> 
                         <label for="cc-exp" class="control-label">Card Expiry</label> 
-                        <input id="cc-exp" type="tel" [(ngModel)]="checkout.expiry" class="input-lg form-control cc-exp" autocomplete="cc-exp" placeholder="MM/YYYY" required> 
+                        <input id="cc-exp" type="text" minlength="5" maxlength="5" [(ngModel)]="checkout.expiry" (ngModelChange)="onChangeExpiry($event)" class="input-lg form-control cc-exp" autocomplete="cc-exp" placeholder="MM/YY" required> 
                     </div>
                     </div>
                     <div class="col-md-6">
                     <div class="form-group"> 
-                        <label for="cc-cvc" class="control-label">Card CVC</label> 
-                        <input id="cc-cvc" type="number" [(ngModel)]="checkout.cvv" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="•••" required> 
+                        <label for="cc-cvc" class="control-label">Card CVC/CVV</label> 
+                        <input id="cc-cvc" type="password" minlength="3" maxlength="3" [(ngModel)]="checkout.cvv" class="input-lg form-control cc-cvc" autocomplete="off" placeholder="•••" required> 
                     </div>
                     </div>
                 </div>

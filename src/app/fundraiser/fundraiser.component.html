@@ -52,7 +52,8 @@
                   <div class="col-12">
                     <div class="d-flex flex-column">
                       <p class="label1">Card Number</p>
-                      <input class="form-control mb-3" type="number" #cardRef="ngModel" placeholder="•••• •••• •••• ••••" name="card_num" [value]="fundraiser.card_num" [(ngModel)]="fundraiser.card_num">
+                      <input class="form-control mb-3" type="text" minlength="19" maxlength="19" #cardRef="ngModel" placeholder="•••• •••• •••• ••••" name="card_num" 
+                             [value]="fundraiser.card_num" [(ngModel)]="fundraiser.card_num" (ngModelChange)="onChangeCard($event)">
                     </div>
                   </div>
                 </div>
